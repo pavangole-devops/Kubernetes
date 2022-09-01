@@ -148,7 +148,8 @@ apache-production   1/1     1            1           17s
 (base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubectl get deployments
 NAME                READY   UP-TO-DATE   AVAILABLE   AGE
 apache-production   1/1     1            1           20s
-(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubet=[K[K[K[K[K[Kkubectl [K[K[K[K[K[K[K[Kkubectl export deployjment[K[K[K[K[Kment [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubec tl[K[K[K[Kctl export [K[K[Kse deployment ap[K[Kapache-rp[K[Kprd[Kodcut[K[K[Kuction --prt=[K[K[Kort=80 --typ e=NodePort
+(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubet=[K[K[K[K[K[Kkubectl [K[K[K[K[K[K[K[Kkubectl export deployjment[K[K[K[K[Kment [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubec tl[K[K[K[Kctl export [K[K[Kse deployment ap[K[Kapache-rp[K[Kprd[Kodcut[K[K[Kuction --prt=[K[K[Kort=80 --typ 
+e=NodePort
 service/apache-production exposed
 (base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubectl get p[Ksvc
 NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
@@ -242,8 +243,13 @@ Use "kubectl options" for a list of global command-line options (applies to all
 commands).
 (base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubeclt scale deployment apache-proudctio[K[K[K[K[K[Kduction --[K[K--replica=3
 kubeclt: command not found
-(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubeclt scale deployment apache-production --replica=3[2@^[[2~scale deployment apache-production --replica=3 [A(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C^Cscale deployment apache-production --replica==3[A(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscale deployment apache-production --replica=3 [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[2P[1P[1P[1P[1P[1@c[1@t[1@l[1@ 
+(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubeclt scale deployment apache-production --replica=3[2@^[[2~scale deployment apache-production --replica=3 [A
+(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C^Cscale deployment apache-production --replica=
+=3[A
+(base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscale deployment apache-production --replica=3 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[2P[1P[1P[1P[1P[1@c[1@t[1@l[1@ 
 Error: unknown flag: --replica
 See 'kubectl scale --help' for usage.
 (base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ kubectl scale =[K[K-- [K[K[K --he[Kelp
