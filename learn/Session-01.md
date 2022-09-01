@@ -365,6 +365,6 @@ No resources found in default namespace.
 😿  service default/kubernetes has no node port
 (base) ]0;vaibhavgole@Vank: ~[01;32mvaibhavgole@Vank[00m:[01;34m~[00m$ exit
 exit
-```sh
+```
 
 Script done on 2022-09-01 09:38:21+0530
