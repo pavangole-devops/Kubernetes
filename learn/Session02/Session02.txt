@@ -1,0 +1,33 @@
+Script started on 2022-09-02 19:30:55+0530
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl g et o[Kpods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl c rate -f pod.yaml 
+Error: unknown command "crate" for "kubectl"
+
+Did you mean this?
+	create
+
+Run 'kubectl --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl crrate -f pod.yaml [A(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ckubectl c reate -f pod.yaml 
+pod/apache created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl g et pods
+NAME     READY   STATUS              RESTARTS   AGE
+apache   0/1     ContainerCreating   0          5s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl g et pods
+NAME     READY   STATUS    RESTARTS   AGE
+apache   1/1     Running   0          10s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl g et pods
+NAME     READY   STATUS    RESTARTS   AGE
+apache   1/1     Running   0          14s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl d l[Kelee[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[Kkubectl d elete -f pod.yaml 
+pod "apache" deleted
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ kubectl g et pods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ 
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ 
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session02[00m$ exit
+exit
+
+Script done on 2022-09-02 19:32:47+0530
