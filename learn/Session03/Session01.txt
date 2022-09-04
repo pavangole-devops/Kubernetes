@@ -1,0 +1,1177 @@
+Script started on 2022-09-04 18:22:23+0530
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ minikube st[K(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ minikube st[K[K[K[K[K[K[K[K[K[K[Kminikube start
+😄  minikube v1.26.1 on Linuxmint 19.3
+✨  Using the vmware driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🔄  Restarting existing vmware VM for "minikube" ...
+🌐  Found network options:
+    ▪ NO_PROXY=localhost,127.0.0.0/8,::1
+    ▪ no_proxy=localhost,127.0.0.0/8,::1
+🐳  Preparing Kubernetes v1.24.3 on Docker 20.10.17 ...| WW[K[K
+    ▪ env NO_PROXY=localhost,127.0.0.0/8,::1
+🔎  Verifying Kubernetes components...
+    ▪ Using image kubernetesui/dashboard:v2.6.0
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+    ▪ Using image kubernetesui/metrics-scraper:v1.0.8
+🌟  Enabled addons: dashboard, storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubecl[Ktlg [K[K gt[Ket pods
+NAME     READY   STATUS    RESTARTS      AGE
+apache   1/1     Running   1 (46h ago)   46h
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl deletel all --[K[K[K[K[K[K[K[K[K[Kl[Kte all
+error: resource(s) were provided, but no name was specified
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl delete all[K[K[K--all
+error: at least one resource must be specified to use a selector
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl delete --all[K[K[K[K[Kall --all
+pod "apache" deleted
+service "kubernetes" deleted
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods -A
+NAMESPACE              NAME                                         READY   STATUS    RESTARTS      AGE
+kube-system            coredns-6d4b75cb6d-nd5ws                     1/1     Running   1 (46h ago)   46h
+kube-system            etcd-minikube                                1/1     Running   1 (46h ago)   46h
+kube-system            kube-apiserver-minikube                      1/1     Running   1 (46h ago)   46h
+kube-system            kube-controller-manager-minikube             1/1     Running   1 (46h ago)   46h
+kube-system            kube-proxy-7bf6m                             1/1     Running   1 (46h ago)   46h
+kube-system            kube-scheduler-minikube                      1/1     Running   1 (46h ago)   46h
+kube-system            storage-provisioner                          1/1     Running   2 (91s ago)   46h
+kubernetes-dashboard   dashboard-metrics-scraper-78dbd9dbf5-qcnql   1/1     Running   1 (46h ago)   46h
+kubernetes-dashboard   kubernetes-dashboard-5fd5574d9f-sv2jx        1/1     Running   2 (92s ago)   46h
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods --help
+Display one or many resources.
+
+ Prints a table of the most important information about the specified resources. You can filter the list using a label
+selector and the --selector flag. If the desired resource type is namespaced you will only see results in your current
+namespace unless you pass --all-namespaces.
+
+ By specifying the output as 'template' and providing a Go template as the value of the --template flag, you can filter
+the attributes of the fetched resources.
+
+Use "kubectl api-resources" for a complete list of supported resources.
+
+Examples:
+  # List all pods in ps output format
+  kubectl get pods
+  
+  # List all pods in ps output format with more information (such as node name)
+  kubectl get pods -o wide
+  
+  # List a single replication controller with specified NAME in ps output format
+  kubectl get replicationcontroller web
+  
+  # List deployments in JSON output format, in the "v1" version of the "apps" API group
+  kubectl get deployments.v1.apps -o json
+  
+  # List a single pod in JSON output format
+  kubectl get -o json pod web-pod-13je7
+  
+  # List a pod identified by type and name specified in "pod.yaml" in JSON output format
+  kubectl get -f pod.yaml -o json
+  
+  # List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml
+  kubectl get -k dir/
+  
+  # Return only the phase value of the specified pod
+  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
+  
+  # List resource information in custom columns
+  kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image
+  
+  # List all replication controllers and services together in ps output format
+  kubectl get rc,services
+  
+  # List one or more resources by their type and names
+  kubectl get rc/web service/frontend pods/web-pod-13je7
+  
+  # List status subresource for a single pod.
+  kubectl get pod web-pod-13je7 --subresource status
+
+Options:
+    -A, --all-namespaces=false:
+	If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even
+	if specified with --namespace.
+
+    --allow-missing-template-keys=true:
+	If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to
+	golang and jsonpath output formats.
+
+    --chunk-size=500:
+	Return large lists in chunks rather than all at once. Pass 0 to disable. This flag is beta and may change in
+	the future.
+
+    --field-selector='':
+	Selector (field query) to filter on, supports '=', '==', and '!='.(e.g. --field-selector
+	key1=value1,key2=value2). The server only supports a limited number of field queries per type.
+
+    -f, --filename=[]:
+	Filename, directory, or URL to files identifying the resource to get from a server.
+
+    --ignore-not-found=false:
+	If the requested object does not exist the command will return exit code 0.
+
+    -k, --kustomize='':
+	Process the kustomization directory. This flag can't be used together with -f or -R.
+
+    -L, --label-columns=[]:
+	Accepts a comma separated list of labels that are going to be presented as columns. Names are case-sensitive.
+	You can also use multiple flag options like -L label1 -L label2...
+
+    --no-headers=false:
+	When using the default or custom-column output format, don't print headers (default print headers).
+
+    -o, --output='':
+	Output format. One of: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath,
+	jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide). See custom columns
+	[https://kubernetes.io/docs/reference/kubectl/#custom-columns], golang template
+	[http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template
+	[https://kubernetes.io/docs/reference/kubectl/jsonpath/].
+
+    --output-watch-events=false:
+	Output watch event objects when --watch or --watch-only is used. Existing objects are output as initial ADDED
+	events.
+
+    --raw='':
+	Raw URI to request from the server.  Uses the transport specified by the kubeconfig file.
+
+    -R, --recursive=false:
+	Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests
+	organized within the same directory.
+
+    -l, --selector='':
+	Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2). Matching
+	objects must satisfy all of the specified label constraints.
+
+    --server-print=true:
+	If true, have the server return the appropriate table output. Supports extension APIs and CRDs.
+
+    --show-kind=false:
+	If present, list the resource type for the requested object(s).
+
+    --show-labels=false:
+	When printing, show all labels as the last column (default hide labels column)
+
+    --show-managed-fields=false:
+	If true, keep the managedFields when printing objects in JSON or YAML format.
+
+    --sort-by='':
+	If non-empty, sort list types using this field specification.  The field specification is expressed as a
+	JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath
+	expression must be an integer or a string.
+
+    --subresource='':
+	If specified, gets the subresource of the requested object. Must be one of [status scale]. This flag is alpha
+	and may change in the future.
+
+    --template='':
+	Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format
+	is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
+    -w, --watch=false:
+	After listing/getting the requested object, watch for changes.
+
+    --watch-only=false:
+	Watch for changes to the requested object(s), without listing/getting first.
+
+Usage:
+  kubectl get
+[(-o|--output=)json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file|custom-columns|custom-columns-file|wide]
+(TYPE[.VERSION][.GROUP] [NAME | -l label] | TYPE[.VERSION][.GROUP]/NAME ...) [flags] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods --help[K[K[K[K[Ko win[Kde
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl crda[K[K[K[Kcrate [K[K[K[Keate pod mypod --[K[K--image-[K=apache
+error: unknown flag: --image
+See 'kubectl create --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl create pod mypod --image=apache[C[C[C[C[C
+error: unknown flag: --image
+See 'kubectl create --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl create pod mypod --image=apache[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+\Error: must specify one of -f and -k
+
+error: unknown command "pod mypod"
+See 'kubectl create -h' for help and examples
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ \[Kkubectl create pod -h
+Create a resource from a file or from stdin.
+
+ JSON and YAML formats are accepted.
+
+Examples:
+  # Create a pod using the data in pod.json
+  kubectl create -f ./pod.json
+  
+  # Create a pod based on the JSON passed into stdin
+  cat pod.json | kubectl create -f -
+  
+  # Edit the data in registry.yaml in JSON then create the resource using the edited data
+  kubectl create -f registry.yaml --edit -o json
+
+Available Commands:
+  clusterrole           Create a cluster role
+  clusterrolebinding    Create a cluster role binding for a particular cluster role
+  configmap             Create a config map from a local file, directory or literal value
+  cronjob               Create a cron job with the specified name
+  deployment            Create a deployment with the specified name
+  ingress               Create an ingress with the specified name
+  job                   Create a job with the specified name
+  namespace             Create a namespace with the specified name
+  poddisruptionbudget   Create a pod disruption budget with the specified name
+  priorityclass         Create a priority class with the specified name
+  quota                 Create a quota with the specified name
+  role                  Create a role with single rule
+  rolebinding           Create a role binding for a particular role or cluster role
+  secret                Create a secret using specified subcommand
+  service               Create a service using a specified subcommand
+  serviceaccount        Create a service account with the specified name
+  token                 Request a service account token
+
+Options:
+    --allow-missing-template-keys=true:
+	If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to
+	golang and jsonpath output formats.
+
+    --dry-run='none':
+	Must be "none", "server", or "client". If client strategy, only print the object that would be sent, without
+	sending it. If server strategy, submit server-side request without persisting the resource.
+
+    --edit=false:
+	Edit the API resource before creating
+
+    --field-manager='kubectl-create':
+	Name of the manager used to track field ownership.
+
+    -f, --filename=[]:
+	Filename, directory, or URL to files to use to create the resource
+
+    -k, --kustomize='':
+	Process the kustomization directory. This flag can't be used together with -f or -R.
+
+    -o, --output='':
+	Output format. One of: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath,
+	jsonpath-as-json, jsonpath-file).
+
+    --raw='':
+	Raw URI to POST to the server.  Uses the transport specified by the kubeconfig file.
+
+    -R, --recursive=false:
+	Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests
+	organized within the same directory.
+
+    --save-config=false:
+	If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will
+	be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+
+    -l, --selector='':
+	Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2). Matching
+	objects must satisfy all of the specified label constraints.
+
+    --show-managed-fields=false:
+	If true, keep the managedFields when printing objects in JSON or YAML format.
+
+    --template='':
+	Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format
+	is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
+    --validate='strict':
+	Must be one of: strict (or true), warn, ignore (or false). 		"true" or "strict" will use a schema to validate
+	the input and fail the request if invalid. It will perform server side validation if ServerSideFieldValidation
+	is enabled on the api-server, but will fall back to less reliable client-side validation if not. 		"warn" will
+	warn about unknown or duplicate fields without blocking the request if server-side field validation is enabled
+	on the API server, and behave as "ignore" otherwise. 		"false" or "ignore" will not perform any schema
+	validation, silently dropping any unknown or duplicate fields.
+
+    --windows-line-endings=false:
+	Only relevant if --edit=true. Defaults to the line ending native to your platform.
+
+Usage:
+  kubectl create -f FILENAME [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl run 
+error: required flag(s) "image" not set
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl run pod --[K[Kmypd[Kod [K 00[K[K--image
+error: flag needs an argument: --image
+See 'kubectl run --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl run pod mypod --image=apache
+pod/pod created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kue[K[K[Kkubectl m[K[K get pods
+NAME   READY   STATUS         RESTARTS   AGE
+pod    0/1     ErrImagePull   0          8s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get podsrun pod mypod --image=apache[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K pod mypod --image[1P[1P[1P[K mypod --image=a[Khttpd
+pod/mypod created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+mypod   0/1     ContainerCreating   0          4s
+pod     0/1     ErrImagePull        0          43s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl get pods -o wide
+NAME    READY   STATUS         RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+mypod   1/1     Running        0          10s   172.17.0.6   minikube   <none>           <none>
+pod     0/1     ErrImagePull   0          49s   172.17.0.4   minikube   <none>           <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl describe mypd[K[K[K[Kpod mypod
+Name:             mypod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/172.16.33.128
+Start Time:       Sun, 04 Sep 2022 18:29:19 +0530
+Labels:           run=mypod
+Annotations:      <none>
+Status:           Running
+IP:               172.17.0.6
+IPs:
+  IP:  172.17.0.6
+Containers:
+  mypod:
+    Container ID:   docker://cfab2e74159deb0cb0217e668ccf11b00739924671ac0a8589841b0183fa9900
+    Image:          httpd
+    Image ID:       docker-pullable://httpd@sha256:70999c4a17c796dd28f86f9c847b30f28abaed6ef1fd72a44282b1c941238804
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sun, 04 Sep 2022 18:29:24 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-n8fw9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-n8fw9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  28s   default-scheduler  Successfully assigned default/mypod to minikube
+  Normal  Pulling    27s   kubelet            Pulling image "httpd"
+  Normal  Pulled     23s   kubelet            Successfully pulled image "httpd" in 4.161088103s
+  Normal  Created    23s   kubelet            Created container mypod
+  Normal  Started    23s   kubelet            Started container mypod
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ 
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ 
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kue[Kbevcrt[K[K[K[Kctl describe pod myp[K[K[Kpod
+Name:             pod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/172.16.33.128
+Start Time:       Sun, 04 Sep 2022 18:28:39 +0530
+Labels:           run=pod
+Annotations:      <none>
+Status:           Pending
+IP:               172.17.0.4
+IPs:
+  IP:  172.17.0.4
+Containers:
+  pod:
+    Container ID:  
+    Image:         apache
+    Image ID:      
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      mypod
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-f9zcz (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-f9zcz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  91s                default-scheduler  Successfully assigned default/pod to minikube
+  Normal   Pulling    39s (x3 over 90s)  kubelet            Pulling image "apache"
+  Warning  Failed     33s (x3 over 84s)  kubelet            Failed to pull image "apache": rpc error: code = Unknown desc = Error response from daemon: pull access denied for apache, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     33s (x3 over 84s)  kubelet            Error: ErrImagePull
+  Normal   BackOff    7s (x4 over 84s)   kubelet            Back-off pulling image "apache"
+  Warning  Failed     7s (x4 over 84s)   kubelet            Error: ImagePullBackOff
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl describe pod pod[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubecd[Ktl get pods -[K[K[K 0[K-h
+Display one or many resources.
+
+ Prints a table of the most important information about the specified resources. You can filter the list using a label
+selector and the --selector flag. If the desired resource type is namespaced you will only see results in your current
+namespace unless you pass --all-namespaces.
+
+ By specifying the output as 'template' and providing a Go template as the value of the --template flag, you can filter
+the attributes of the fetched resources.
+
+Use "kubectl api-resources" for a complete list of supported resources.
+
+Examples:
+  # List all pods in ps output format
+  kubectl get pods
+  
+  # List all pods in ps output format with more information (such as node name)
+  kubectl get pods -o wide
+  
+  # List a single replication controller with specified NAME in ps output format
+  kubectl get replicationcontroller web
+  
+  # List deployments in JSON output format, in the "v1" version of the "apps" API group
+  kubectl get deployments.v1.apps -o json
+  
+  # List a single pod in JSON output format
+  kubectl get -o json pod web-pod-13je7
+  
+  # List a pod identified by type and name specified in "pod.yaml" in JSON output format
+  kubectl get -f pod.yaml -o json
+  
+  # List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml
+  kubectl get -k dir/
+  
+  # Return only the phase value of the specified pod
+  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
+  
+  # List resource information in custom columns
+  kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image
+  
+  # List all replication controllers and services together in ps output format
+  kubectl get rc,services
+  
+  # List one or more resources by their type and names
+  kubectl get rc/web service/frontend pods/web-pod-13je7
+  
+  # List status subresource for a single pod.
+  kubectl get pod web-pod-13je7 --subresource status
+
+Options:
+    -A, --all-namespaces=false:
+	If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even
+	if specified with --namespace.
+
+    --allow-missing-template-keys=true:
+	If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to
+	golang and jsonpath output formats.
+
+    --chunk-size=500:
+	Return large lists in chunks rather than all at once. Pass 0 to disable. This flag is beta and may change in
+	the future.
+
+    --field-selector='':
+	Selector (field query) to filter on, supports '=', '==', and '!='.(e.g. --field-selector
+	key1=value1,key2=value2). The server only supports a limited number of field queries per type.
+
+    -f, --filename=[]:
+	Filename, directory, or URL to files identifying the resource to get from a server.
+
+    --ignore-not-found=false:
+	If the requested object does not exist the command will return exit code 0.
+
+    -k, --kustomize='':
+	Process the kustomization directory. This flag can't be used together with -f or -R.
+
+    -L, --label-columns=[]:
+	Accepts a comma separated list of labels that are going to be presented as columns. Names are case-sensitive.
+	You can also use multiple flag options like -L label1 -L label2...
+
+    --no-headers=false:
+	When using the default or custom-column output format, don't print headers (default print headers).
+
+    -o, --output='':
+	Output format. One of: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath,
+	jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide). See custom columns
+	[https://kubernetes.io/docs/reference/kubectl/#custom-columns], golang template
+	[http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template
+	[https://kubernetes.io/docs/reference/kubectl/jsonpath/].
+
+    --output-watch-events=false:
+	Output watch event objects when --watch or --watch-only is used. Existing objects are output as initial ADDED
+	events.
+
+    --raw='':
+	Raw URI to request from the server.  Uses the transport specified by the kubeconfig file.
+
+    -R, --recursive=false:
+	Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests
+	organized within the same directory.
+
+    -l, --selector='':
+	Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2). Matching
+	objects must satisfy all of the specified label constraints.
+
+    --server-print=true:
+	If true, have the server return the appropriate table output. Supports extension APIs and CRDs.
+
+    --show-kind=false:
+	If present, list the resource type for the requested object(s).
+
+    --show-labels=false:
+	When printing, show all labels as the last column (default hide labels column)
+
+    --show-managed-fields=false:
+	If true, keep the managedFields when printing objects in JSON or YAML format.
+
+    --sort-by='':
+	If non-empty, sort list types using this field specification.  The field specification is expressed as a
+	JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath
+	expression must be an integer or a string.
+
+    --subresource='':
+	If specified, gets the subresource of the requested object. Must be one of [status scale]. This flag is alpha
+	and may change in the future.
+
+    --template='':
+	Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format
+	is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
+    -w, --watch=false:
+	After listing/getting the requested object, watch for changes.
+
+    --watch-only=false:
+	Watch for changes to the requested object(s), without listing/getting first.
+
+Usage:
+  kubectl get
+[(-o|--output=)json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file|custom-columns|custom-columns-file|wide]
+(TYPE[.VERSION][.GROUP] [NAME | -l label] | TYPE[.VERSION][.GROUP]/NAME ...) [flags] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kubectl gt[Ket pods
+NAME    READY   STATUS         RESTARTS   AGE
+mypod   1/1     Running        0          3m7s
+pod     0/1     ErrImagePull   0          3m46s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ kube[K[K[K[Kkubectl dl[Kelete all --all
+pod "mypod" deleted
+pod "pod" deleted
+service "kubernetes" deleted
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn[00m$ cd [K[K[Kcd Session03/
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ ls
+rc.yml  Session01.txt
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl apply rc.yml [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubectl apply -f rc.yml 
+replicationcontroller/fristrc created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS              RESTARTS   AGE
+fristrc-2ns5s   0/1     ContainerCreating   0          6s
+fristrc-8pts2   0/1     ContainerCreating   0          6s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS              RESTARTS   AGE
+fristrc-2ns5s   0/1     ContainerCreating   0          11s
+fristrc-8pts2   1/1     Running             0          11s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+fristrc-2ns5s   1/1     Running   0          14s
+fristrc-8pts2   1/1     Running   0          14s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+fristrc   2         2         2       17s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get rcpods -L web
+NAME            READY   STATUS    RESTARTS   AGE   WEB
+fristrc-2ns5s   1/1     Running   0          24s   
+fristrc-8pts2   1/1     Running   0          24s   
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods -L web[K[K[Kapp
+NAME            READY   STATUS    RESTARTS   AGE   APP
+fristrc-2ns5s   1/1     Running   0          29s   web
+fristrc-8pts2   1/1     Running   0          29s   web
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods -L app[K[K[Ka[K--all
+NAME            READY   STATUS    RESTARTS   AGE   --ALL
+fristrc-2ns5s   1/1     Running   0          35s   
+fristrc-8pts2   1/1     Running   0          35s   
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods -L --all[K[K[K[K[K[K[K[K-A
+NAMESPACE              NAME                                         READY   STATUS    RESTARTS        AGE
+default                fristrc-2ns5s                                1/1     Running   0               40s
+default                fristrc-8pts2                                1/1     Running   0               40s
+kube-system            coredns-6d4b75cb6d-nd5ws                     1/1     Running   1 (46h ago)     46h
+kube-system            etcd-minikube                                1/1     Running   1 (46h ago)     46h
+kube-system            kube-apiserver-minikube                      1/1     Running   1 (46h ago)     46h
+kube-system            kube-controller-manager-minikube             1/1     Running   1 (46h ago)     46h
+kube-system            kube-proxy-7bf6m                             1/1     Running   1 (46h ago)     46h
+kube-system            kube-scheduler-minikube                      1/1     Running   1 (46h ago)     46h
+kube-system            storage-provisioner                          1/1     Running   2 (8m28s ago)   46h
+kubernetes-dashboard   dashboard-metrics-scraper-78dbd9dbf5-qcnql   1/1     Running   1 (46h ago)     46h
+kubernetes-dashboard   kubernetes-dashboard-5fd5574d9f-sv2jx        1/1     Running   2 (8m29s ago)   46h
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods -A[Ko wide
+NAME            READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+fristrc-2ns5s   1/1     Running   0          45s   172.17.0.6   minikube   <none>           <none>
+fristrc-8pts2   1/1     Running   0          45s   172.17.0.4   minikube   <none>           <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kuge[K[Kbectl get pods -L=[web,[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcat rc.yml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: fristrc
+spec:
+  replicas: 2
+  selector:
+    app: web
+  template:
+    metadata:
+      name: "mypod1"
+      labels:
+        app: web
+        deployment: prod
+    spec:
+      containers:
+      - name: "container"
+        image: "httpd"(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ cat rc.yml kubectl get pods -o wide[K[K[K[K[K[K[K-L=[web,[K[K[K[Kapp,dp[Keployment]
+NAME            READY   STATUS    RESTARTS   AGE   [APP   DEPLOYMENT]
+fristrc-2ns5s   1/1     Running   0          88s          
+fristrc-8pts2   1/1     Running   0          88s          
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods -L=[app,deployment][K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kapp,deployment
+NAME            READY   STATUS    RESTARTS   AGE   APP   DEPLOYMENT
+fristrc-2ns5s   1/1     Running   0          97s   web   prod
+fristrc-8pts2   1/1     Running   0          97s   web   prod
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2m23s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikbe [K[K[Kube svc kubernetes --url
+Error: unknown command "svc" for "minikube"
+
+Did you mean this?
+	ssh
+
+Run 'minikube --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube servie[Kc
+Error: unknown command "servic" for "minikube"
+
+Did you mean this?
+	service
+
+Run 'minikube --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube service
+
+❌  Exiting due to MK_USAGE: You must specify service name(s) or --all
+
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube service --all
+|-----------|------------|-------------|--------------|
+| NAMESPACE |    NAME    | TARGET PORT |     URL      |
+|-----------|------------|-------------|--------------|
+| default   | kubernetes |             | No node port |
+|-----------|------------|-------------|--------------|
+😿  service default/kubernetes has no node port
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube service --all[K[K[K[K[Kkubernetes --url
+😿  service default/kubernetes has no node port
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube service kubernetes --url[K[K[K[K[K-h
+Returns the Kubernetes URL(s) for service(s) in your local cluster. In the case of multiple URLs they will be printed
+one at a time.
+
+Available Commands:
+  list          Lists the URLs for the services in your local cluster
+
+Options:
+    --all=false:
+	Forwards all services in a namespace (defaults to "false")
+
+    --https=false:
+	Open the service URL with https instead of http (defaults to "false")
+
+    --interval=1:
+	The initial time interval for each check that wait performs in seconds
+
+    -n, --namespace='default':
+	The service namespace
+
+    --url=false:
+	Display the Kubernetes service URL in the CLI instead of opening it in the default browser
+
+    --wait=2:
+	Amount of time to wait for a service in seconds
+
+Usage:
+  minikube service [flags] SERVICE [options]
+
+Use "minikube <command> --help" for more information about a given command.
+Use "minikube options" for a list of global command-line options (applies to all commands).
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+fristrc   2         2         2       3m9s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl describe rc
+Name:         fristrc
+Namespace:    default
+Selector:     app=web
+Labels:       app=web
+              deployment=prod
+Annotations:  <none>
+Replicas:     2 current / 2 desired
+Pods Status:  2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=web
+           deployment=prod
+  Containers:
+   container:
+    Image:        httpd
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                    Message
+  ----    ------            ----   ----                    -------
+  Normal  SuccessfulCreate  3m13s  replication-controller  Created pod: fristrc-8pts2
+  Normal  SuccessfulCreate  3m13s  replication-controller  Created pod: fristrc-2ns5s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get [K[K[K[K[K get pods
+NAME            READY   STATUS    RESTARTS   AGE
+fristrc-2ns5s   1/1     Running   0          3m28s
+fristrc-8pts2   1/1     Running   0          3m28s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubecgtl [K[K[K[Ktl gd[K[Kdelete pod fristrc-2ns5s
+pod "fristrc-2ns5s" deleted
+^[[A^[[A^[[2~(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl delete pod fristrc-2ns5s[16Pget pods^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[A [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdescribe rc[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget pods^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[A [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdescribe rc[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pget[C[C[Cminikube service kubernetes -h^C
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl delete pod fristrc-2ns5sget pods^[[2~^[[2~^[[2~^[[2~^[[2~^[[2~^[[A [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ks
+NAME            READY   STATUS    RESTARTS   AGE
+fristrc-8pts2   1/1     Running   0          3m54s
+fristrc-gp8r8   1/1     Running   0          14s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl delete pod fristrc-8pts2
+pod "fristrc-8pts2" deleted
+^[[A    (base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl delete pod fristrc-8pts2[16Pget pods
+NAME            READY   STATUS              RESTARTS   AGE
+fristrc-2rd62   0/1     ContainerCreating   0          5s
+fristrc-gp8r8   1/1     Running             0          32s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+fristrc-2rd62   1/1     Running   0          7s
+fristrc-gp8r8   1/1     Running   0          34s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kub[K[K[Kkubectl describe pd [K[Kod fristrc-2rd62
+Name:             fristrc-2rd62
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/172.16.33.128
+Start Time:       Sun, 04 Sep 2022 18:37:19 +0530
+Labels:           app=web
+                  deployment=prod
+Annotations:      <none>
+Status:           Running
+IP:               172.17.0.6
+IPs:
+  IP:           172.17.0.6
+Controlled By:  ReplicationController/fristrc
+Containers:
+  container:
+    Container ID:   docker://e3bcec7bde3d8aa49a96abb3dba8f9690c73d3af0253c0ef1accc6e6cea7212a
+    Image:          httpd
+    Image ID:       docker-pullable://httpd@sha256:70999c4a17c796dd28f86f9c847b30f28abaed6ef1fd72a44282b1c941238804
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sun, 04 Sep 2022 18:37:24 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-ppt78 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-ppt78:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  24s   default-scheduler  Successfully assigned default/fristrc-2rd62 to minikube
+  Normal  Pulling    23s   kubelet            Pulling image "httpd"
+  Normal  Pulled     19s   kubelet            Successfully pulled image "httpd" in 3.841950943s
+  Normal  Created    19s   kubelet            Created container container
+  Normal  Started    19s   kubelet            Started container container
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl describe pod fristrc-2rd62[K[K[K[K[K[K[K[K[K[K[K[K[K[Ks -0[Ko wide
+error: unknown shorthand flag: 'o' in -o
+See 'kubectl describe --help' for usage.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl describe pods -o wide[K[K[K[K[K[K[K0[K-o wid[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kget pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+fristrc-2rd62   1/1     Running   0          70s   172.17.0.6   minikube   <none>           <none>
+fristrc-gp8r8   1/1     Running   0          97s   172.17.0.7   minikube   <none>           <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ crul [K[K[K[Kurl 172.17.0.6[K[K[K[K[K[K[K[K[K[Khttp://172.17.0.6
+^C
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ mink[Kikube ssh
+                         _             _            
+            _         _ ( )           ( )           
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __  
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ curl http://172.17.0.6
+<html><body><h1>It works!</h1></body></html>
+$ kuer    docker ps -a
+CONTAINER ID   IMAGE                          COMMAND                  CREATED              STATUS                      PORTS     NAMES
+e3bcec7bde3d   httpd                          "httpd-foreground"       About a minute ago   Up About a minute                     k8s_container_fristrc-2rd62_default_bf325350-db9c-4284-bb98-cfd7a9f3a5eb_0
+74d5515491ba   k8s.gcr.io/pause:3.6           "/pause"                 About a minute ago   Up About a minute                     k8s_POD_fristrc-2rd62_default_bf325350-db9c-4284-bb98-cfd7a9f3a5eb_0
+ade8c9bc2d6e   httpd                          "httpd-foreground"       2 minutes ago        Up 2 minutes                          k8s_container_fristrc-gp8r8_default_b27a1ee1-af86-455a-91da-60ac76d9e245_0
+e43acf664a6d   k8s.gcr.io/pause:3.6           "/pause"                 2 minutes ago        Up 2 minutes                          k8s_POD_fristrc-gp8r8_default_b27a1ee1-af86-455a-91da-60ac76d9e245_0
+bf6da31b92dc   k8s.gcr.io/pause:3.6           "/pause"                 6 minutes ago        Exited (0) 2 minutes ago              k8s_POD_fristrc-2ns5s_default_8df4a212-d525-4b9b-b9fc-87865a5dcedd_0
+452c4fe02b3a   1042d9e0d8fc                   "/dashboard --insecu…"   13 minutes ago       Up 13 minutes                         k8s_kubernetes-dashboard_kubernetes-dashboard-5fd5574d9f-sv2jx_kubernetes-dashboard_190928ee-3a74-473d-bbd3-f2a4612cd053_2
+59caf7b8cb6a   6e38f40d628d                   "/storage-provisioner"   13 minutes ago       Up 13 minutes                         k8s_storage-provisioner_storage-provisioner_kube-system_3fd243a1-cba1-4052-8bac-c348ab8a3e7c_2
+21b924d3fadd   1042d9e0d8fc                   "/dashboard --insecu…"   14 minutes ago       Exited (2) 13 minutes ago             k8s_kubernetes-dashboard_kubernetes-dashboard-5fd5574d9f-sv2jx_kubernetes-dashboard_190928ee-3a74-473d-bbd3-f2a4612cd053_1
+23dbb42dc4fb   6e38f40d628d                   "/storage-provisioner"   14 minutes ago       Exited (1) 13 minutes ago             k8s_storage-provisioner_storage-provisioner_kube-system_3fd243a1-cba1-4052-8bac-c348ab8a3e7c_1
+051df486dc70   a4ca41631cc7                   "/coredns -conf /etc…"   14 minutes ago       Up 14 minutes                         k8s_coredns_coredns-6d4b75cb6d-nd5ws_kube-system_587b2fa0-76d1-4f55-99dd-4e3dbda6fffb_1
+b22798f69fb9   115053965e86                   "/metrics-sidecar"       14 minutes ago       Up 14 minutes                         k8s_dashboard-metrics-scraper_dashboard-metrics-scraper-78dbd9dbf5-qcnql_kubernetes-dashboard_06b6f5f7-395e-40fb-bb2f-e0a624f501be_1
+78203b12dd72   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Up 14 minutes                         k8s_POD_storage-provisioner_kube-system_3fd243a1-cba1-4052-8bac-c348ab8a3e7c_1
+575a849c0ce6   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Up 14 minutes                         k8s_POD_coredns-6d4b75cb6d-nd5ws_kube-system_587b2fa0-76d1-4f55-99dd-4e3dbda6fffb_1
+0408e65a4d6f   2ae1ba6417cb                   "/usr/local/bin/kube…"   14 minutes ago       Up 14 minutes                         k8s_kube-proxy_kube-proxy-7bf6m_kube-system_b6d38efa-b1ad-45db-a86a-a2c99bd18ea6_1
+dd1f46ed47ae   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Exited (0) 12 minutes ago             k8s_POD_apache_default_a13c070d-c5d2-4123-bdb9-5e98be4501a9_1
+f9e66fc5da1b   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Up 14 minutes                         k8s_POD_kubernetes-dashboard-5fd5574d9f-sv2jx_kubernetes-dashboard_190928ee-3a74-473d-bbd3-f2a4612cd053_1
+3b9b8b44d62e   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Up 14 minutes                         k8s_POD_kube-proxy-7bf6m_kube-system_b6d38efa-b1ad-45db-a86a-a2c99bd18ea6_1
+f5a5caf31c0d   k8s.gcr.io/pause:3.6           "/pause"                 14 minutes ago       Up 14 minutes                         k8s_POD_dashboard-metrics-scraper-78dbd9dbf5-qcnql_kubernetes-dashboard_06b6f5f7-395e-40fb-bb2f-e0a624f501be_1
+3160dd4ae09c   aebe758cef4c                   "etcd --advertise-cl…"   14 minutes ago       Up 14 minutes                         k8s_etcd_etcd-minikube_kube-system_8674dd62831d67fc12904868a95debc3_1
+684b10cfe538   3a5aa3a515f5                   "kube-scheduler --au…"   14 minutes ago       Up 14 minutes                         k8s_kube-scheduler_kube-scheduler-minikube_kube-system_2e95d5efbc70e877d20097c03ba4ff89_1
+1a9db9ecd438   586c112956df                   "kube-controller-man…"   15 minutes ago       Up 14 minutes                         k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_4f82078a5dfd579f16196dd9ef946750_1
+2760a0420b37   d521dd763e2e                   "kube-apiserver --ad…"   15 minutes ago       Up 14 minutes                         k8s_kube-apiserver_kube-apiserver-minikube_kube-system_493d2cc37f8e3e1467a5c5bb98bec65a_1
+d485e4dcd088   k8s.gcr.io/pause:3.6           "/pause"                 15 minutes ago       Up 14 minutes                         k8s_POD_kube-scheduler-minikube_kube-system_2e95d5efbc70e877d20097c03ba4ff89_1
+c97864d61f0b   k8s.gcr.io/pause:3.6           "/pause"                 15 minutes ago       Up 14 minutes                         k8s_POD_etcd-minikube_kube-system_8674dd62831d67fc12904868a95debc3_1
+f1b485906df7   k8s.gcr.io/pause:3.6           "/pause"                 15 minutes ago       Up 14 minutes                         k8s_POD_kube-controller-manager-minikube_kube-system_4f82078a5dfd579f16196dd9ef946750_1
+1c56fef0b88f   k8s.gcr.io/pause:3.6           "/pause"                 15 minutes ago       Up 14 minutes                         k8s_POD_kube-apiserver-minikube_kube-system_493d2cc37f8e3e1467a5c5bb98bec65a_1
+f9550c948739   kubernetesui/metrics-scraper   "/metrics-sidecar"       47 hours ago         Exited (137) 46 hours ago             k8s_dashboard-metrics-scraper_dashboard-metrics-scraper-78dbd9dbf5-qcnql_kubernetes-dashboard_06b6f5f7-395e-40fb-bb2f-e0a624f501be_0
+82919aff6a56   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (137) 46 hours ago             k8s_POD_dashboard-metrics-scraper-78dbd9dbf5-qcnql_kubernetes-dashboard_06b6f5f7-395e-40fb-bb2f-e0a624f501be_0
+5c7e334b9b0a   a4ca41631cc7                   "/coredns -conf /etc…"   47 hours ago         Exited (137) 46 hours ago             k8s_coredns_coredns-6d4b75cb6d-nd5ws_kube-system_587b2fa0-76d1-4f55-99dd-4e3dbda6fffb_0
+fb9665818637   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (137) 46 hours ago             k8s_POD_coredns-6d4b75cb6d-nd5ws_kube-system_587b2fa0-76d1-4f55-99dd-4e3dbda6fffb_0
+e0b235714326   2ae1ba6417cb                   "/usr/local/bin/kube…"   47 hours ago         Exited (2) 46 hours ago               k8s_kube-proxy_kube-proxy-7bf6m_kube-system_b6d38efa-b1ad-45db-a86a-a2c99bd18ea6_0
+b72f80352613   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (137) 46 hours ago             k8s_POD_kube-proxy-7bf6m_kube-system_b6d38efa-b1ad-45db-a86a-a2c99bd18ea6_0
+ea20cc5175b8   aebe758cef4c                   "etcd --advertise-cl…"   47 hours ago         Exited (0) 46 hours ago               k8s_etcd_etcd-minikube_kube-system_8674dd62831d67fc12904868a95debc3_0
+9f602d090955   3a5aa3a515f5                   "kube-scheduler --au…"   47 hours ago         Exited (137) 46 hours ago             k8s_kube-scheduler_kube-scheduler-minikube_kube-system_2e95d5efbc70e877d20097c03ba4ff89_0
+c6ad2d463171   d521dd763e2e                   "kube-apiserver --ad…"   47 hours ago         Exited (0) 46 hours ago               k8s_kube-apiserver_kube-apiserver-minikube_kube-system_493d2cc37f8e3e1467a5c5bb98bec65a_0
+01713d99d448   586c112956df                   "kube-controller-man…"   47 hours ago         Exited (2) 46 hours ago               k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_4f82078a5dfd579f16196dd9ef946750_0
+986c21467c5f   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (0) 46 hours ago               k8s_POD_etcd-minikube_kube-system_8674dd62831d67fc12904868a95debc3_0
+8d4903bb3d9b   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (0) 46 hours ago               k8s_POD_kube-apiserver-minikube_kube-system_493d2cc37f8e3e1467a5c5bb98bec65a_0
+0951e067f9df   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (0) 46 hours ago               k8s_POD_kube-controller-manager-minikube_kube-system_4f82078a5dfd579f16196dd9ef946750_0
+64e0d376be9c   k8s.gcr.io/pause:3.6           "/pause"                 47 hours ago         Exited (0) 46 hours ago               k8s_POD_kube-scheduler-minikube_kube-system_2e95d5efbc70e877d20097c03ba4ff89_0
+$ 
+$ 
+$ exit
+logout
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kue[K[K[Kkubectl exo[K[K[K[K[K[K[K[K[K[K[Kkubectl get rc -h
+Display one or many resources.
+
+ Prints a table of the most important information about the specified resources. You can filter the list using a label
+selector and the --selector flag. If the desired resource type is namespaced you will only see results in your current
+namespace unless you pass --all-namespaces.
+
+ By specifying the output as 'template' and providing a Go template as the value of the --template flag, you can filter
+the attributes of the fetched resources.
+
+Use "kubectl api-resources" for a complete list of supported resources.
+
+Examples:
+  # List all pods in ps output format
+  kubectl get pods
+  
+  # List all pods in ps output format with more information (such as node name)
+  kubectl get pods -o wide
+  
+  # List a single replication controller with specified NAME in ps output format
+  kubectl get replicationcontroller web
+  
+  # List deployments in JSON output format, in the "v1" version of the "apps" API group
+  kubectl get deployments.v1.apps -o json
+  
+  # List a single pod in JSON output format
+  kubectl get -o json pod web-pod-13je7
+  
+  # List a pod identified by type and name specified in "pod.yaml" in JSON output format
+  kubectl get -f pod.yaml -o json
+  
+  # List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml
+  kubectl get -k dir/
+  
+  # Return only the phase value of the specified pod
+  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
+  
+  # List resource information in custom columns
+  kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image
+  
+  # List all replication controllers and services together in ps output format
+  kubectl get rc,services
+  
+  # List one or more resources by their type and names
+  kubectl get rc/web service/frontend pods/web-pod-13je7
+  
+  # List status subresource for a single pod.
+  kubectl get pod web-pod-13je7 --subresource status
+
+Options:
+    -A, --all-namespaces=false:
+	If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even
+	if specified with --namespace.
+
+    --allow-missing-template-keys=true:
+	If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to
+	golang and jsonpath output formats.
+
+    --chunk-size=500:
+	Return large lists in chunks rather than all at once. Pass 0 to disable. This flag is beta and may change in
+	the future.
+
+    --field-selector='':
+	Selector (field query) to filter on, supports '=', '==', and '!='.(e.g. --field-selector
+	key1=value1,key2=value2). The server only supports a limited number of field queries per type.
+
+    -f, --filename=[]:
+	Filename, directory, or URL to files identifying the resource to get from a server.
+
+    --ignore-not-found=false:
+	If the requested object does not exist the command will return exit code 0.
+
+    -k, --kustomize='':
+	Process the kustomization directory. This flag can't be used together with -f or -R.
+
+    -L, --label-columns=[]:
+	Accepts a comma separated list of labels that are going to be presented as columns. Names are case-sensitive.
+	You can also use multiple flag options like -L label1 -L label2...
+
+    --no-headers=false:
+	When using the default or custom-column output format, don't print headers (default print headers).
+
+    -o, --output='':
+	Output format. One of: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath,
+	jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide). See custom columns
+	[https://kubernetes.io/docs/reference/kubectl/#custom-columns], golang template
+	[http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template
+	[https://kubernetes.io/docs/reference/kubectl/jsonpath/].
+
+    --output-watch-events=false:
+	Output watch event objects when --watch or --watch-only is used. Existing objects are output as initial ADDED
+	events.
+
+    --raw='':
+	Raw URI to request from the server.  Uses the transport specified by the kubeconfig file.
+
+    -R, --recursive=false:
+	Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests
+	organized within the same directory.
+
+    -l, --selector='':
+	Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2). Matching
+	objects must satisfy all of the specified label constraints.
+
+    --server-print=true:
+	If true, have the server return the appropriate table output. Supports extension APIs and CRDs.
+
+    --show-kind=false:
+	If present, list the resource type for the requested object(s).
+
+    --show-labels=false:
+	When printing, show all labels as the last column (default hide labels column)
+
+    --show-managed-fields=false:
+	If true, keep the managedFields when printing objects in JSON or YAML format.
+
+    --sort-by='':
+	If non-empty, sort list types using this field specification.  The field specification is expressed as a
+	JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath
+	expression must be an integer or a string.
+
+    --subresource='':
+	If specified, gets the subresource of the requested object. Must be one of [status scale]. This flag is alpha
+	and may change in the future.
+
+    --template='':
+	Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format
+	is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
+    -w, --watch=false:
+	After listing/getting the requested object, watch for changes.
+
+    --watch-only=false:
+	Watch for changes to the requested object(s), without listing/getting first.
+
+Usage:
+  kubectl get
+[(-o|--output=)json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file|custom-columns|custom-columns-file|wide]
+(TYPE[.VERSION][.GROUP] [NAME | -l label] | TYPE[.VERSION][.GROUP]/NAME ...) [flags] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get rc -h[K[K
+NAME      DESIRED   CURRENT   READY   AGE
+fristrc   2         2         2       6m56s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get rc -0[Ko wide
+NAME      DESIRED   CURRENT   READY   AGE    CONTAINERS   IMAGES   SELECTOR
+fristrc   2         2         2       7m2s   container    httpd    app=web
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl describe rc
+Name:         fristrc
+Namespace:    default
+Selector:     app=web
+Labels:       app=web
+              deployment=prod
+Annotations:  <none>
+Replicas:     2 current / 2 desired
+Pods Status:  2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=web
+           deployment=prod
+  Containers:
+   container:
+    Image:        httpd
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                    Message
+  ----    ------            ----   ----                    -------
+  Normal  SuccessfulCreate  7m21s  replication-controller  Created pod: fristrc-8pts2
+  Normal  SuccessfulCreate  7m21s  replication-controller  Created pod: fristrc-2ns5s
+  Normal  SuccessfulCreate  3m41s  replication-controller  Created pod: fristrc-gp8r8
+  Normal  SuccessfulCreate  3m14s  replication-controller  Created pod: fristrc-2rd62
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ ls
+rc.yml  Session01.txt
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ cat rc.yml 
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: fristrc
+spec:
+  replicas: 2
+  selector:
+    app: web
+  template:
+    metadata:
+      name: "mypod1"
+      labels:
+        app: web
+        deployment: prod
+    spec:
+      containers:
+      - name: "container"
+        image: "httpd"(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ vim[K[K[Kvim rc.yml 
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;32r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[32;1H"rc.yml" [noeol] 18L, 293C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[36mapiVersion[m[35m:[m v1
+[36mkind[m[35m:[m ReplicationController
+[36mmetadata[m[35m:[m
+  [36mname[m[35m:[m fristrc
+[36mspec[m[35m:[m
+  [36mreplicas[m[35m:[m [31m2[m
+  [36mselector[m[35m:[m
+    [36mapp[m[35m:[m web
+  [36mtemplate[m[35m:[m
+    [36mmetadata[m[35m:[m[11;7H[36mname[m[35m:[m [31m"mypod1"[m[12;7H[36mlabels[m[35m:[m[13;9H[36mapp[m[35m:[m web[14;9H[36mdeployment[m[35m:[m prod
+    [36mspec[m[35m:[m[16;7H[36mcontainers[m[35m:[m[17;7H[38;5;130m- [m[36mname[m[35m:[m [31m"container"[m[18;9H[36mimage[m[35m:[m [31m"httpd"[m
+[94m~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H1,1[11CAll[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[1m[96mapiVersion[m[38;5;224m:[m v1
+[1m[96mkind[m[38;5;224m:[m ReplicationController
+[1m[96mmetadata[m[38;5;224m:[m
+  [1m[96mname[m[38;5;224m:[m fristrc
+[1m[96mspec[m[38;5;224m:[m
+  [1m[96mreplicas[m[38;5;224m:[m [95m2[m
+  [1m[96mselector[m[38;5;224m:[m
+    [1m[96mapp[m[38;5;224m:[m web
+  [1m[96mtemplate[m[38;5;224m:[m
+    [1m[96mmetadata[m[38;5;224m:[m[11;7H[1m[96mname[m[38;5;224m:[m [95m"mypod1"[m[12;7H[1m[96mlabels[m[38;5;224m:[m[13;9H[1m[96mapp[m[38;5;224m:[m web[14;9H[1m[96mdeployment[m[38;5;224m:[m prod
+    [1m[96mspec[m[38;5;224m:[m[16;7H[1m[96mcontainers[m[38;5;224m:[m[17;7H[93m- [m[1m[96mname[m[38;5;224m:[m [95m"container"[m[18;9H[1m[96mimage[m[38;5;224m:[m [95m"httpd"[m
+[94m~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H1,1[11CAll"rc.yml" [noeol] 18L, 293C[1;1H[?25h[?25l[32;100H~@k[1;1H[32;100H   [2;1H[32;110H2[2;1H[?25h[?25l[32;100H~@k[2;1H[32;100H   [3;1H[32;110H3[3;1H[?25h[?25l[32;100H~@k[3;1H[32;100H   [4;1H[32;110H4[4;1H[?25h[?25l[32;100H~@k[4;1H[32;100H   [5;1H[32;110H5[5;1H[?25h[?25l[32;100H~@k[5;1H[32;100H   [6;1H[32;110H6[6;1H[?25h[?25l[32;100H~@k[6;1H[32;100H   [7;1H[32;110H7[7;1H[?25h[?25l[32;100H~@k[7;1H[32;100H   [8;1H[32;110H8[8;1H[?25h[?25l[32;100H~@k[8;1H[32;100H   [8;2H[32;112H2[8;2H[?25h[?25l[32;100H~@k[8;2H[32;100H   [8;3H[32;112H3[8;3H[?25h[?25l[32;100H~@k[8;3H[32;100H   [8;4H[32;112H4[8;4H[?25h[?25l[32;100H~@k[8;4H[32;100H   [8;5H[32;112H5[8;5H[?25h[?25l[32;100H~@k[8;5H[32;100H   [8;6H[32;112H6[8;6H[?25h[?25l[32;100H~@k[8;6H[32;100H   [8;7H[32;112H7[8;7H[?25h[?25l[32;100H~@k[8;7H[32;100H   [8;8H[32;112H8[8;8H[?25h[?25l[32;100H~@k[8;8H[32;100H   [8;9H[32;112H9[8;9H[?25h[?25l[32;100H~@k[8;9H[32;100H   [8;10H[32;112H10[8;10H[?25h[?25l[32;100H~@k[8;10H[32;100H   [8;11H[32;113H1[8;11H[?25h[?25l[32;100H~@k[8;11H[32;100H   [8;12H[32;113H2[8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100H~@k[8;12H[32;100H   [8;12H[?25h[?25l[32;100Hj[8;12H[32;100H [9;11H[32;110H9,11[9;11H[?25h[?25l[32;100Hi[9;11H[32;100H [9;11H[32;1H[1m-- INSERT --[m[32;13H[K[32;110H9,11[10CAll[9;11H[?25h[?25l[32;110H8[8;11H[?25h[?25l[32;113H2[8;12H[?25h[?25lib[32;113H3[8;13H[?25h[?25lb[8;13H[K[32;113H2[8;12H[?25h[?25l[32;113H3[8;13H[?25h[?25l[9;31r[9;1H[L[1;32r[32;110H[K[32;110H9,5[11CAll[9;5H[?25h[?25ld[32;112H6[9;6H[?25h[?25le[32;112H7[9;7H[?25h[?25lp[32;112H8[9;8H[?25h[?25ll[32;112H9[9;9H[?25h[?25lo[32;112H10[9;10H[?25h[?25ly[32;113H1[9;11H[?25h[?25lm[32;113H2[9;12H[?25h[?25ln[32;113H3[9;13H[?25h[?25l[9;12H[K[32;113H2[9;12H[?25h[?25le[32;113H3[9;13H[?25h[?25ln[32;113H4[9;14H[?25h[?25lt[32;113H5[9;15H[?25h[?25l    [1m[96mdeployment[m[38;5;224m:[m[32;113H6[9;16H[?25h[?25l[32;113H7[9;17H[?25h[?25lp[32;113H8[9;18H[?25h[?25lr[32;113H9[9;19H[?25h[?25lo[32;112H20[9;20H[?25h[?25ld[32;113H1[9;21H[?25h[32;1H[K[9;20H[?25l[32;100H^[[9;20H[32;100H  [9;21H[32;110H9,20[10CAll[9;20H[?25h[?25l[32;100H:[9;20H[32;100H[K[32;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"rc.yml" 19L, 315C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl appl[K[K[K[Kreplace -f rc.yml 
+replicationcontroller/fristrc replaced
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+fristrc-2rd62   1/1     Running   0          4m12s
+fristrc-gp8r8   1/1     Running   0          4m39s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ k[Kkubectl [K[K[K[K[K[K[K[Kkubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+fristrc   2         2         2       8m30s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl describe rc
+Name:         fristrc
+Namespace:    default
+Selector:     app=web,deployment=prod
+Labels:       app=web
+              deployment=prod
+Annotations:  <none>
+Replicas:     2 current / 2 desired
+Pods Status:  2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=web
+           deployment=prod
+  Containers:
+   container:
+    Image:        httpd
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                    Message
+  ----    ------            ----   ----                    -------
+  Normal  SuccessfulCreate  8m35s  replication-controller  Created pod: fristrc-8pts2
+  Normal  SuccessfulCreate  8m35s  replication-controller  Created pod: fristrc-2ns5s
+  Normal  SuccessfulCreate  4m55s  replication-controller  Created pod: fristrc-gp8r8
+  Normal  SuccessfulCreate  4m28s  replication-controller  Created pod: fristrc-2rd62
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl dg[K[Kget rc -o wide
+NAME      DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES   SELECTOR
+fristrc   2         2         2       8m45s   container    httpd    app=web,deployment=prod
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl expose rc ris[K[K[Kfristrc --type=NodePort
+error: couldn't find port via --port flag or introspection
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl expose rc fristrc --type=NodePort[C --type=NodePort- --type=NodePort- --type=NodePortp --type=NodePorto --type=NodePortr --type=NodePortt --type=NodePort= --type=NodePort8 --type=NodePort [A(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C0 --type=NodePortt[A(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --type=NodePort[A(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+service/fristrc exposed
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubecct[K[Kct[K[Ktl get all
+NAME                READY   STATUS    RESTARTS   AGE
+pod/fristrc-2rd62   1/1     Running   0          5m30s
+pod/fristrc-gp8r8   1/1     Running   0          5m57s
+
+NAME                            DESIRED   CURRENT   READY   AGE
+replicationcontroller/fristrc   2         2         2       9m37s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/fristrc      NodePort    10.105.197.68   <none>        80:32504/TCP   9s
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        10m
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikbe s[K[K[K[Kube seri[Kvice [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubect[Ktl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+fristrc      NodePort    10.105.197.68   <none>        80:32504/TCP   39s
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        10m
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get svc -o wide
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+fristrc      NodePort    10.105.197.68   <none>        80:32504/TCP   43s   app=web,deployment=prod
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        10m   <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ mii[K[K[Kminikube service frist [Krc --url
+http://172.16.33.128:32504
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube [K[K[K[K[K[K[K[K[Kkue[Kbectl delete all --all
+pod "fristrc-2rd62" deleted
+pod "fristrc-gp8r8" deleted
+replicationcontroller "fristrc" deleted
+service "fristrc" deleted
+service "kubernetes" deleted
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ kubectl get pods
+NAME            READY   STATUS        RESTARTS   AGE
+fristrc-r927t   1/1     Terminating   0          7s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ k[Kkubectl get pods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ minikube stop
+✋  Stopping node "minikube"  ...
+🛑  1 node stopped.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session03[00m$ exit
+exit
+
+Script done on 2022-09-04 18:45:46+0530
