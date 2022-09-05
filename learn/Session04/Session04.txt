@@ -1,0 +1,201 @@
+Script started on 2022-09-05 21:50:19+0530
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get pdo[K[Kods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   27h
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectgl [K[K[Kl delete all --all
+service "kubernetes" deleted
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get svc
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl [K[K[K[K[K[K[K[Kls
+pod.yml  service.yml  Session04.txt
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl create -[K[K[K[K[K[K[K[Kapply -f service.yml 
+error: error validating "service.yml": error validating data: ValidationError(Service.spec): unknown field "selectors" in io.k8s.api.core.v1.ServiceSpec; if you choose to ignore these errors, turn validation off with --validate=false
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl apply -f service.yml 
+error: error validating "service.yml": error validating data: ValidationError(Service.spec.selector.ports): invalid type for io.k8s.api.core.v1.ServiceSpec.selector: got "map", expected "string"; if you choose to ignore these errors, turn validation off with --validate=false
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim [K[K[K[Kvim service.yml 
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;32r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[32;1H"service.yml" 11L, 146C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[36mapiVersion[m[35m:[m v1
+[36mkind[m[35m:[m Service
+[36mmetadata[m[35m:[m
+  [36mname[m[35m:[m apache-service
+
+[36mspec[m[35m:[m
+  [36mselector[m[35m:[m
+    [36mapp[m[35m:[m [31m"web"[m
+    [36mports[m[35m:[m[10;7H[36mtargetPort[m[35m:[m [31m80[m[11;7H[36mport[m[35m:[m [31m8080[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H7,10[10CAll[7;10H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[1m[96mapiVersion[m[38;5;224m:[m v1
+[1m[96mkind[m[38;5;224m:[m Service
+[1m[96mmetadata[m[38;5;224m:[m
+  [1m[96mname[m[38;5;224m:[m apache-service
+
+[1m[96mspec[m[38;5;224m:[m
+  [1m[96mselector[m[38;5;224m:[m
+    [1m[96mapp[m[38;5;224m:[m [95m"web"[m
+    [1m[96mports[m[38;5;224m:[m[10;7H[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[11;7H[1m[96mport[m[38;5;224m:[m [95m8080[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H7,10[10CAll"service.yml" 11L, 146C[7;10H[?25h[?25l[32;100H~@k[7;10H[32;100H   [8;10H[32;110H8[8;10H[?25h[?25l[32;100H~@k[8;10H[32;100H   [9;10H[32;110H9[9;10H[?25h[?25l[32;100H~@k[9;10H[32;100H   [8;10H[32;110H8[8;10H[?25h[?25l[32;100H~@k[8;10H[32;100H   [8;9H[32;112H9 [8;9H[?25h[?25l[32;100H~@k[8;9H[32;100H   [8;8H[32;112H8[8;8H[?25h[?25l[32;100H~@k[8;8H[32;100H   [8;7H[32;112H7[8;7H[?25h[?25l[32;100H~@k[8;7H[32;100H   [8;6H[32;112H6[8;6H[?25h[?25l[32;100H~@k[8;6H[32;100H   [8;5H[32;112H5[8;5H[?25h[?25l[32;100H~@k[8;5H[32;100H   [9;5H[32;110H9[9;5H[?25h[?25l[32;100H~@k[9;5H[32;100H   [9;4H[32;112H4[9;4H[?25h[?25l[32;100H~@k[9;4H[32;100H   [9;3H[32;112H3[9;3H[?25h[?25l[32;100Hi[9;3H[32;100H [9;3H[32;1H[1m-- INSERT --[m[32;13H[K[32;110H9,3[11CAll[9;3H[?25h[?25l[32;112H4[9;4H[?25h[?25l[1m[96mports[m[38;5;224m:[m[9;10H[K[32;112H3[9;3H[?25h[?25l[1m[96mports[m[38;5;224m:[m[9;9H[K[32;112H2[9;2H[?25h[?25l[32;110H10,2[10;2H[?25h[?25l[32;113H3[10;3H[?25h[?25l[32;113H4[10;4H[?25h[?25l[32;113H5[10;5H[?25h[?25l[32;113H6[10;6H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;20H[K[32;113H5[10;5H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;19H[K[32;113H4[10;4H[?25h[?25l[32;111H1[11;4H[?25h[?25l[32;113H5[11;5H[?25h[?25l[32;113H6[11;6H[?25h[?25l[1m[96mport[m[38;5;224m:[m [95m8080[m[11;16H[K[32;113H5[11;5H[?25h[?25l[1m[96mport[m[38;5;224m:[m [95m8080[m[11;15H[K[32;113H4[11;4H[?25h[?25l  [1m[96mport[m[38;5;224m:[m [95m8080[m[32;113H5[11;5H[?25h[?25l[1m[96mport[m[38;5;224m:[m [95m8080[m[11;15H[K[32;113H4[11;4H[?25h[32;1H[K[11;3H[?25l[32;100H^[[11;3H[32;100H  [11;4H[32;110H11,3[10CAll[11;3H[?25h[?25l[32;100H:[11;3H[32;100H[K[32;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"service.yml" 11L, 140C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim service.yml [13@kubectl apply -f[C[C[C[C[C[C[C[C[C[C[C[C[C
+error: error validating "service.yml": error validating data: ValidationError(Service.spec.ports): invalid type for io.k8s.api.core.v1.ServiceSpec.ports: got "map", expected "array"; if you choose to ignore these errors, turn validation off with --validate=false
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim[K[K[Kkubectl apply -f service.yml [13Pvim[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;32r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[32;1H"service.yml" 11L, 140C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[36mapiVersion[m[35m:[m v1
+[36mkind[m[35m:[m Service
+[36mmetadata[m[35m:[m
+  [36mname[m[35m:[m apache-service
+
+[36mspec[m[35m:[m
+  [36mselector[m[35m:[m
+    [36mapp[m[35m:[m [31m"web"[m
+  [36mports[m[35m:[m
+    [36mtargetPort[m[35m:[m [31m80[m
+    [36mport[m[35m:[m [31m8080[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H11,3[10CAll[11;3H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[1m[96mapiVersion[m[38;5;224m:[m v1
+[1m[96mkind[m[38;5;224m:[m Service
+[1m[96mmetadata[m[38;5;224m:[m
+  [1m[96mname[m[38;5;224m:[m apache-service
+
+[1m[96mspec[m[38;5;224m:[m
+  [1m[96mselector[m[38;5;224m:[m
+    [1m[96mapp[m[38;5;224m:[m [95m"web"[m
+  [1m[96mports[m[38;5;224m:[m
+    [1m[96mtargetPort[m[38;5;224m:[m [95m80[m
+    [1m[96mport[m[38;5;224m:[m [95m8080[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H11,3[10CAll"service.yml" 11L, 140C[11;3H[?25h[?25l[32;100H~@k[11;3H[32;100H   [10;3H[32;111H0[10;3H[?25h[?25l[32;100H~@k[10;3H[32;100H   [10;4H[32;113H4[10;4H[?25h[?25l[32;100H-[10;4H[32;100H [9;3H[32;110H9,3 [9;3H[?25h[?25l[32;100H~@k[9;3H[32;100H   [10;3H[32;110H10,3[10;3H[?25h[?25l[32;100H~@k[10;3H[32;100H   [10;4H[32;113H4[10;4H[?25h[?25l[32;100Hi[10;4H[32;100H [10;4H[32;1H[1m-- INSERT --[m[32;13H[K[32;110H10,4[10CAll[10;4H[?25h[?25l       [93m- [m[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[32;113H12[10;12H[?25h[?25l [1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;26H[K[32;114H1[10;11H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;25H[K[32;114H0[10;10H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;24H[K[32;113H9 [10;9H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;23H[K[32;113H8[10;8H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;22H[K[32;113H7[10;7H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;21H[K[32;113H6[10;6H[?25h[?25l[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[10;20H[K[32;113H5[10;5H[?25h[?25l[93m- [m[1m[96mtargetPort[m[38;5;224m:[m [95m80[m[32;113H6[10;6H[?25h[?25l[32;111H1[11;6H[?25h[?25l[32;113H5[11;5H[?25h[?25l [1m[96mport[m[38;5;224m:[m [95m8080[m[32;113H6[11;6H[?25h[?25l [1m[96mport[m[38;5;224m:[m [95m8080[m[32;113H7[11;7H[?25h[32;1H[K[11;6H[?25l[32;100H^[[11;6H[32;100H  [11;7H[32;110H11,6[10CAll[11;6H[?25h[?25l[32;100H:[11;6H[32;100H[K[32;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"service.yml" 11L, 144C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim service.yml [13@kubectl apply -f[C[C[C[C[C[C[C[C[C[C[C[C[C
+service/apache-service created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get svc
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+apache-service   ClusterIP   10.98.159.204   <none>        8080/TCP   4s
+kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP    3m48s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get svc
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+apache-service   ClusterIP   10.98.159.204   <none>        8080/TCP   9s
+kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP    3m53s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get od[K[Kpods
+No resources found in default namespace.
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kuec[Kctl s[Kdescribe sv [Kc apache-service
+kuectl: command not found
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kuectl describe svc apache-service[1P[1@b[1@e
+Name:              apache-service
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=web
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.98.159.204
+IPs:               10.98.159.204
+Port:              <unset>  8080/TCP
+TargetPort:        80/TCP
+Endpoints:         <none>
+Session Affinity:  None
+Events:            <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kue[Kbectl apply -f pod.yml 
+error: error validating "pod.yml": error validating data: ValidationError(Pod): unknown field "metadat" in io.k8s.api.core.v1.Pod; if you choose to ignore these errors, turn validation off with --validate=false
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim pod.yml 
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;32r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[32;1H"pod.yml" [noeol] 11L, 139C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[36mapiVersion[m[35m:[m v1
+[36mkind[m[35m:[m Pod
+[36mmetadat[m[35m:[m
+  [36mname[m[35m:[m [31m"apachepod"[m
+  [36mlabels[m[35m:[m
+    [36mapp[m[35m:[m android
+
+[36mspec[m[35m:[m
+  [36mcontainers[m[35m:[m
+  [38;5;130m- [m[36mname[m[35m:[m [31m"apache"[m
+    [36mimage[m[35m:[m [31m"httpd"[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H1,1[11CAll[1;1H[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[27m[23m[29m[m[H[2J[?25l[1;1H[1m[96mapiVersion[m[38;5;224m:[m v1
+[1m[96mkind[m[38;5;224m:[m Pod
+[1m[96mmetadat[m[38;5;224m:[m
+  [1m[96mname[m[38;5;224m:[m [95m"apachepod"[m
+  [1m[96mlabels[m[38;5;224m:[m
+    [1m[96mapp[m[38;5;224m:[m android
+
+[1m[96mspec[m[38;5;224m:[m
+  [1m[96mcontainers[m[38;5;224m:[m
+  [93m- [m[1m[96mname[m[38;5;224m:[m [95m"apache"[m
+    [1m[96mimage[m[38;5;224m:[m [95m"httpd"[m
+[94m~                                                                                                                              [13;1H~                                                                                                                              [14;1H~                                                                                                                              [15;1H~                                                                                                                              [16;1H~                                                                                                                              [17;1H~                                                                                                                              [18;1H~                                                                                                                              [19;1H~                                                                                                                              [20;1H~                                                                                                                              [21;1H~                                                                                                                              [22;1H~                                                                                                                              [23;1H~                                                                                                                              [24;1H~                                                                                                                              [25;1H~                                                                                                                              [26;1H~                                                                                                                              [27;1H~                                                                                                                              [28;1H~                                                                                                                              [29;1H~                                                                                                                              [30;1H~                                                                                                                              [31;1H~                                                                                                                              [m[32;110H1,1[11CAll"pod.yml" [noeol] 11L, 139C[1;1H[?25h[?25l[32;100H^[[1;1H[32;100H  [1;1H[32;100H^[[1;1H[32;100H  [1;1H[?25h[?25l[32;100H:[1;1H[32;1H[K[32;1H:[?2004h[?25h[?25l[32;1H[K[1;1H[32;110H1,1[11CAll[1;1H[?25h[?25l[32;100H~@k[1;1H[32;100H   [1;1H[?25h[?25l[32;100H~@k[1;1H[32;100H   [2;1H[32;110H2[2;1H[?25h[?25l[32;100H~@k[2;1H[32;100H   [3;1H[32;110H3[3;1H[?25h[?25l[32;100H~@k[3;1H[32;100H   [3;2H[32;112H2[3;2H[?25h[?25l[32;100H~@k[3;2H[32;100H   [3;3H[32;112H3[3;3H[?25h[?25l[32;100H~@k[3;3H[32;100H   [3;4H[32;112H4[3;4H[?25h[?25l[32;100H~@k[3;4H[32;100H   [3;5H[32;112H5[3;5H[?25h[?25l[32;100H~@k[3;5H[32;100H   [3;6H[32;112H6[3;6H[?25h[?25l[32;100H~@k[3;6H[32;100H   [3;7H[32;112H7[3;7H[?25h[?25l[32;100Hi[3;7H[32;100H [3;7H[32;1H[1m-- INSERT --[m[32;110H[K[32;110H3,7[11CAll[3;7H[?25h[?25l[32;112H8[3;8H[?25h[?25l[1m[96ma[m[38;5;224m:[m[32;112H9[3;9H[?25h[32;1H[K[3;8H[?25l[32;100H^[[3;8H[32;100H  [3;9H[32;110H3,8[11CAll[3;8H[?25h[?25l[32;100H:[3;8H[32;100H[K[32;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"pod.yml" 11L, 141C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim pod.yml [13@kubectl apply -f[C[C[C[C[C[C[C[C[C
+pod/apachepod created
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kue[Kbectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+apachepod   0/1     ContainerCreating   0          5s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+apachepod   1/1     Running   0          8s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+apachepod   1/1     Running   0          10s
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl desc[K[K[K[K[K[K[K[K[K[K[K[Kkubectl ge[K[Kdescribe pod apachepod
+Name:             apachepod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/172.16.33.128
+Start Time:       Mon, 05 Sep 2022 21:55:59 +0530
+Labels:           app=android
+Annotations:      <none>
+Status:           Running
+IP:               172.17.0.3
+IPs:
+  IP:  172.17.0.3
+Containers:
+  apache:
+    Container ID:   docker://481fa5fe7be82650030b4a08040b4d8da1f1e723ea8e279e0af0ec5afeecdc56
+    Image:          httpd
+    Image ID:       docker-pullable://httpd@sha256:70999c4a17c796dd28f86f9c847b30f28abaed6ef1fd72a44282b1c941238804
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Mon, 05 Sep 2022 21:56:06 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mwwql (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-mwwql:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  21s   default-scheduler  Successfully assigned default/apachepod to minikube
+  Normal  Pulling    20s   kubelet            Pulling image "httpd"
+  Normal  Pulled     15s   kubelet            Successfully pulled image "httpd" in 4.471637965s
+  Normal  Created    15s   kubelet            Created container apache
+  Normal  Started    14s   kubelet            Started container apache
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ kubectl g[Kdescribe svc apache-service
+Name:              apache-service
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=web
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.98.159.204
+IPs:               10.98.159.204
+Port:              <unset>  8080/TCP
+TargetPort:        80/TCP
+Endpoints:         <none>
+Session Affinity:  None
+Events:            <none>
+(base) ]0;vaibhavgole@Vank: ~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[01;32mvaibhavgole@Vank[00m:[01;34m~/workspace-Pavan/DevOps/Kubernetes/learn/Session04[00m$ vim pod [K[K[K[K[K[K[K[Kexit
+exit
+
+Script done on 2022-09-05 21:57:05+0530
